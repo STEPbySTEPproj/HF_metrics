@@ -16,10 +16,14 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--exo_datafile', '-edf', type=str, required=True,
                         help='Name of the exoskeleton datafile (write without .csv extension)')  # relative to this script
-    parser.add_argument('--normal_datafile', '-ndf', type=str, required=True,
+    parser.add_argument('--noexo_datafile', '-ndf', type=str, required=True,
                         help='Name of the normal datafile without exo (write without .csv extension)')
     parser.add_argument('--output_file', type=str, default='HR_metrics',
                         help='Name of the output yaml file (write without .yaml extension)')
+    parser.add_argument('--exo_task_time', '-et', type=float, required=True,
+                        help='Total time for task execution time in seconds with exoskeleton')
+    parser.add_argument('--noexo_task_time', '-nt', type=float, required=True,
+                        help='Total time for task execution in seconds without exoskeleton')
 
     return parser.parse_args()
 
@@ -33,7 +37,7 @@ def load_data(filename):
 
 def main(config):
 
-    df_no_exo = load_data(config.normal_datafile)
+    df_no_exo = load_data(config.noexo_datafile)
     df_exo = load_data(config.exo_datafile)
 
     #######################
@@ -63,8 +67,7 @@ def main(config):
     print(f"Total time taken for the responses [s]: {total_time_no_exo}")
 
     # execution time: total time ascending/descending
-    exe_time_ad_no_exo = input("Insert the total time for ascending/descendig without exo [s]: ")
-    float(exe_time_ad_no_exo)
+    exe_time_ad_no_exo = config.noexo_task_time
 
     #######################
     # EXOSKELETON DATA
@@ -92,11 +95,9 @@ def main(config):
     print(f"Total time taken for the responses [s]: {total_time_exo}")
 
     # execution time: total time ascending/descending
-    exe_time_ad_exo = input("Insert the total time for ascending/descendig with exo [s]: ")
-    float(exe_time_ad_exo)
-
+    exe_time_ad_exo = config.exo_task_time
+    
     # data differences
-
     total_err_resp_diff = total_err_exo - total_err_no_exo
     tot_time_diff = total_time_exo - total_time_no_exo
     tot_ad_time_diff = float(exe_time_ad_exo) - float(exe_time_ad_no_exo)
