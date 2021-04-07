@@ -5,7 +5,7 @@
 [script.py](script.py) takes as an input the data files (in .csv format) related to the HF protocols for both with and without the use of exoskeleton. Datafiles should be provided relative to where the script is run from. 
 It then computes the related metrics. It also optionally accepts the output filename (in .yaml format). 
 
-After executing the script, the user is asked to insert the total time taken for the performing asending/descending task with and without using esoskeleton 
+After executing the script, the user is asked to insert the total time taken for performing the asending/descending task with and without using esoskeleton 
 
 The usage is like this:
 ```
