@@ -6,8 +6,8 @@
 
 It then computes the related metrics. It also optionally accepts the output filename (in .yaml format). 
 
-
-The usage is like this:
+## USE
+The command for using the script is below:
 ```
 python script.py --exo_datafile FILENAME_EXO --noexo_datafile FILENAME_WITHOUT_EXO 
 --exo_task_time TASK_TIME_EXO --noexo_task_time TASK_TIME_WITHOUT_EXO
