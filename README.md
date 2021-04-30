@@ -27,14 +27,34 @@ The command for using the script is below:
 ```console
 python script.py --exo_datafile FILENAME_EXO --noexo_datafile FILENAME_WITHOUT_EXO
 --exo_task_time TASK_TIME_EXO --noexo_task_time TASK_TIME_WITHOUT_EXO
---output_file FILENAME_OUT
+--output_folder FILENAME_OUT
 ```
-
 
 Using the reference data provided with the repository, one can call:
 
 ```console
-python3 script.py -edf test/input/subject-1.csv -ndf test/input/subject-1.csv --exo_task_time 1 --noexo_task_time 1 --output_file out
+run_pi_hf test/input/subject-1.csv test/input/subject-1.csv 1 1 out
+# if the python package, has not been installed as indicated
+python3 src/pi_hf/pi_hf/script.py -edf test/input/subject-1.csv -ndf test/input/subject-1.csv --exo_task_time 1 --noexo_task_time 1 --output_folder out
+```
+## Docker image
+
+### Build from source
+
+_(only tested under Linux)_
+
+Run the following command in order to create the docker image for this PI:
+
+```console
+docker build . -t pi_sbs_hf
+```
+
+### Launch the docker image
+
+Assuming `test/input` contains the input data, and that the directory `out/` is **already created**, and will contain the PI output:
+
+```shell
+docker run --rm -v $PWD/test/input:/in -v $PWD/out:/out pi_sbs_hf run_pi_hf /in/subject-1.csv /in/subject-1.csv 1 1 /out
 ```
 
 ## Acknowledgements

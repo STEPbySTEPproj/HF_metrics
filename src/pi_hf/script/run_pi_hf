@@ -55,7 +55,7 @@ if __name__ == '__main__':
         sys.exit(-1)
 
 
-    l_argument = ['-edf', fn_exo_datafile, '-ndf', fn_noexo_datafile, '-et', exo_task_time, '-nt', noexo_task_time, '--output_file', folder_out]
+    l_argument = ['-edf', fn_exo_datafile, '-ndf', fn_noexo_datafile, '-et', exo_task_time, '-nt', noexo_task_time, '--output_folder', folder_out]
 
     args = parse_args(l_argument)
     sys.exit(main(args))

@@ -19,8 +19,8 @@ def parse_args(args):
                         help='Name of the exoskeleton datafile (write with .csv extension)')  # relative to this script
     parser.add_argument('--noexo_datafile', '-ndf', type=str, required=True,
                         help='Name of the normal datafile without exo (write with .csv extension)')
-    parser.add_argument('--output_file', type=str, default='HR_metrics',
-                        help='Name of the output yaml file (write without .yaml extension)')
+    parser.add_argument('--output_folder', type=str, default='./',
+                        help='Name of the folder where the output yaml file will be stored')
     parser.add_argument('--exo_task_time', '-et', type=float, required=True,
                         help='Total time for task execution time in seconds with exoskeleton')
     parser.add_argument('--noexo_task_time', '-nt', type=float, required=True,
@@ -115,7 +115,8 @@ def main(config):
                       'total_execution_time': {'no exo': tot_ad_time_diff, 'exo': exe_time_ad_no_exo,
                                                'difference': exe_time_ad_exo}}
 
-    with open(config.output_file, 'w') as file:
+    file_output = config.output_folder + "/pi_hf.yaml"
+    with open(file_output, 'w') as file:
         yaml.dump(f_metrics_dict, file)
 
 
