@@ -15,9 +15,9 @@ def parse_args():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--exo_datafile', '-edf', type=str, required=True,
-                        help='Name of the exoskeleton datafile (write without .csv extension)')  # relative to this script
+                        help='Name of the exoskeleton datafile (write with .csv extension)')  # relative to this script
     parser.add_argument('--noexo_datafile', '-ndf', type=str, required=True,
-                        help='Name of the normal datafile without exo (write without .csv extension)')
+                        help='Name of the normal datafile without exo (write with .csv extension)')
     parser.add_argument('--output_file', type=str, default='HR_metrics',
                         help='Name of the output yaml file (write without .yaml extension)')
     parser.add_argument('--exo_task_time', '-et', type=float, required=True,
@@ -114,7 +114,7 @@ def main(config):
                       'total_execution_time': {'no exo': tot_ad_time_diff, 'exo': exe_time_ad_no_exo,
                                                'difference': exe_time_ad_exo}}
 
-    with open(config.output_file + '.yaml', 'w') as file:
+    with open(config.output_file, 'w') as file:
         yaml.dump(f_metrics_dict, file)
 
 
