@@ -9,30 +9,31 @@ import argparse
 import os
 import pandas as pd
 import yaml
+import sys
 
 
-def parse_args():
+def parse_args(args):
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--exo_datafile', '-edf', type=str, required=True,
                         help='Name of the exoskeleton datafile (write with .csv extension)')  # relative to this script
     parser.add_argument('--noexo_datafile', '-ndf', type=str, required=True,
                         help='Name of the normal datafile without exo (write with .csv extension)')
-    parser.add_argument('--output_file', type=str, default='HR_metrics',
-                        help='Name of the output yaml file (write without .yaml extension)')
+    parser.add_argument('--output_folder', type=str, default='./',
+                        help='Name of the folder where the output yaml file will be stored')
     parser.add_argument('--exo_task_time', '-et', type=float, required=True,
                         help='Total time for task execution time in seconds with exoskeleton')
     parser.add_argument('--noexo_task_time', '-nt', type=float, required=True,
                         help='Total time for task execution in seconds without exoskeleton')
 
-    return parser.parse_args()
+    return parser.parse_args(args)
 
 
 def load_data(filename):
 
-    data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
+    #data_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
 
-    return pd.read_csv(data_path)
+    return pd.read_csv(filename)
 
 
 def main(config):
@@ -96,7 +97,7 @@ def main(config):
 
     # execution time: total time ascending/descending
     exe_time_ad_exo = config.exo_task_time
-    
+
     # data differences
     total_err_resp_diff = total_err_exo - total_err_no_exo
     tot_time_diff = total_time_exo - total_time_no_exo
@@ -114,10 +115,11 @@ def main(config):
                       'total_execution_time': {'no exo': tot_ad_time_diff, 'exo': exe_time_ad_no_exo,
                                                'difference': exe_time_ad_exo}}
 
-    with open(config.output_file, 'w') as file:
+    file_output = config.output_folder + "/pi_hf.yaml"
+    with open(file_output, 'w') as file:
         yaml.dump(f_metrics_dict, file)
 
 
 if __name__ == '__main__':
-    args = parse_args()
+    args = parse_args(sys.argv[1:])
     main(args)
