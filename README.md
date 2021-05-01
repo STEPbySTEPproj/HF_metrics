@@ -1,8 +1,8 @@
 # HF_metrics
 
-[script.py](script.py) takes as an input the data files (in .csv format) related to the HF protocols for both with and without the use of exoskeleton. Datafile names should be provided with .csv extension and relative to where the script is run from. Arguments related to the execution time for asending/descending task are also required as an input.
+[script.py](script.py) takes as an input the data files (in .csv format) related to the HF protocols for both with and without the use of exoskeleton. Datafile names should be provided with .csv extension. Condition data file (in.yaml format) related to the execution time for asending/descending task is also required as an input.
 
-It then computes the related metrics. It also optionally accepts the output filename (in .yaml format).
+It then computes the related metrics. It also optionally accepts the output folder name.
 
 ## Installation
 
@@ -25,17 +25,16 @@ deactivate
 The command for using the script is below:
 
 ```console
-python script.py --exo_datafile FILENAME_EXO --noexo_datafile FILENAME_WITHOUT_EXO
---exo_task_time TASK_TIME_EXO --noexo_task_time TASK_TIME_WITHOUT_EXO
---output_folder FILENAME_OUT
+run_pi_hf test/input/subject_1_platformData.csv test/input/subject_1_platformData.csv test/input/subject_1_condition.yaml out
 ```
 
 Using the reference data provided with the repository, one can call:
 
 ```console
-run_pi_hf test/input/subject-1.csv test/input/subject-1.csv 1 1 out
+run_pi_hf test/input/subject_1_platformData.csv test/input/subject_1_platformData.csv test/input/subject_1_condition.yaml out
 # if the python package, has not been installed as indicated
-python3 src/pi_hf/pi_hf/script.py -edf test/input/subject-1.csv -ndf test/input/subject-1.csv --exo_task_time 1 --noexo_task_time 1 --output_folder out
+python3 src/pi_hf/pi_hf/script.py -edf test/input/subject_1_platformData_exo.csv -ndf test/input/subject_1_platformData_noexo.csv 
+--condition test/input/subject_1_condition.yaml --output_folder out
 ```
 ## Docker image
 
