@@ -22,12 +22,6 @@ deactivate
 
 ## Use
 
-The command for using the script is below:
-
-```console
-run_pi_hf test/input/subject_1_platformData.csv test/input/subject_1_platformData.csv test/input/subject_1_condition.yaml out
-```
-
 Using the reference data provided with the repository, one can call:
 
 ```console
