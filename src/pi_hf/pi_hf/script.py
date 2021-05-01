@@ -21,10 +21,8 @@ def parse_args(args):
                         help='Name of the normal datafile without exo (write with .csv extension)')
     parser.add_argument('--output_folder', type=str, default='./',
                         help='Name of the folder where the output yaml file will be stored')
-    parser.add_argument('--exo_task_time', '-et', type=float, required=True,
-                        help='Total time for task execution time in seconds with exoskeleton')
-    parser.add_argument('--noexo_task_time', '-nt', type=float, required=True,
-                        help='Total time for task execution in seconds without exoskeleton')
+    parser.add_argument('--condition', type=str, required=True,
+                        help='Name of the file containing total time for the task execution')
 
     return parser.parse_args(args)
 
@@ -67,9 +65,6 @@ def main(config):
 
     print(f"Total time taken for the responses [s]: {total_time_no_exo}")
 
-    # execution time: total time ascending/descending
-    exe_time_ad_no_exo = config.noexo_task_time
-
     #######################
     # EXOSKELETON DATA
     #######################
@@ -95,10 +90,18 @@ def main(config):
 
     print(f"Total time taken for the responses [s]: {total_time_exo}")
 
+    #######################
+    # DATA DIFFERENCES
+    #######################
+    
     # execution time: total time ascending/descending
-    exe_time_ad_exo = config.exo_task_time
 
-    # data differences
+    with open(config.condition, 'r') as file:
+        times = yaml.safe_load(file)
+    
+    exe_time_ad_no_exo = times['noexo_task_time']
+    exe_time_ad_exo = times['exo_task_time']
+    
     total_err_resp_diff = total_err_exo - total_err_no_exo
     tot_time_diff = total_time_exo - total_time_no_exo
     tot_ad_time_diff = float(exe_time_ad_exo) - float(exe_time_ad_no_exo)
@@ -114,6 +117,9 @@ def main(config):
                                                'difference': tot_time_diff},
                       'total_execution_time': {'no exo': tot_ad_time_diff, 'exo': exe_time_ad_no_exo,
                                                'difference': exe_time_ad_exo}}
+    
+    if not os.path.exists(config.output_folder):
+        os.makedirs(config.output_folder)
 
     file_output = config.output_folder + "/pi_hf.yaml"
     with open(file_output, 'w') as file:
