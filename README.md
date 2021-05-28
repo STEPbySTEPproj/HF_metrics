@@ -25,7 +25,7 @@ deactivate
 Using the reference data provided with the repository, one can call:
 
 ```console
-run_pi_hf test/input/subject_1_platformData.csv test/input/subject_1_platformData.csv test/input/subject_1_condition.yaml out
+run_pi_hf test/input/subject_1_platformData_exo.csv test/input/subject_1_platformData_noexo.csv test/input/subject_1_condition.yaml out
 # if the python package, has not been installed as indicated
 python3 src/pi_hf/pi_hf/script.py -edf test/input/subject_1_platformData_exo.csv -ndf test/input/subject_1_platformData_noexo.csv 
 --condition test/input/subject_1_condition.yaml --output_folder out
@@ -47,7 +47,7 @@ docker build . -t pi_sbs_hf
 Assuming `test/input` contains the input data, and that the directory `out/` is **already created**, and will contain the PI output:
 
 ```shell
-docker run --rm -v $PWD/test/input:/in -v $PWD/out:/out pi_sbs_hf run_pi_hf /in/subject-1.csv /in/subject-1.csv 1 1 /out
+docker run --rm -v $PWD/test/input:/in -v $PWD/out:/out pi_sbs_hf run_pi_hf /in/subject_1_platformData_exo.csv /insubject_1_platformData_noexo.csv /in/subject_1_condition.yaml /out
 ```
 
 ## Acknowledgements

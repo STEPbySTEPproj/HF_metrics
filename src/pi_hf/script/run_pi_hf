@@ -15,16 +15,15 @@ USAGE = """ usage: run exo_datafile noexo_datafile exo_task_time no_exo_task_tim
 
 if __name__ == '__main__':
 
-    if len(sys.argv) != 6:
+    if len(sys.argv) != 5:
         print(colored("Wrong input parameters !", "red"))
         print(colored(USAGE, "yellow"))
         sys.exit(-1)
 
     fn_exo_datafile = sys.argv[1]
     fn_noexo_datafile = sys.argv[2]
-    exo_task_time = sys.argv[3]
-    noexo_task_time = sys.argv[4]
-    folder_out = sys.argv[5]
+    fn_condition = sys.argv[3]
+    folder_out = sys.argv[4]
 
     if not os.path.exists(fn_exo_datafile):
         print(colored("Input file {} does not exist".format(fn_exo_datafile), "red"))
@@ -42,6 +41,15 @@ if __name__ == '__main__':
         print(colored("Input path {} is not a file".format(fn_noexo_datafile), "red"))
         sys.exit(-1)
 
+    if not os.path.exists(fn_condition):
+        print(colored("Input file {} does not exist".format(fn_condition), "red"))
+        sys.exit(-1)
+
+    if not os.path.isfile(fn_condition):
+        print(colored("Input path {} is not a file".format(fn_condition), "red"))
+        sys.exit(-1)
+
+
     if not os.path.exists(folder_out):
         print(colored(
             "Output folder {} does not exist".format(folder_out),
@@ -55,7 +63,7 @@ if __name__ == '__main__':
         sys.exit(-1)
 
 
-    l_argument = ['-edf', fn_exo_datafile, '-ndf', fn_noexo_datafile, '-et', exo_task_time, '-nt', noexo_task_time, '--output_folder', folder_out]
+    l_argument = ['-edf', fn_exo_datafile, '-ndf', fn_noexo_datafile, '--condition', fn_condition, '--output_folder', folder_out]
 
     args = parse_args(l_argument)
     sys.exit(main(args))
