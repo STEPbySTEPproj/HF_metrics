@@ -22,6 +22,9 @@ setup(
     license='Beerware',
     packages= find_packages(),
     scripts=['script/run_pi_hf'],
+    entry_points = {
+        "console_scripts": ['run_hf = pi_hf:main_script']
+    },
     include_package_data=True,
     classifiers=[
         'Development Status :: 5 - Production/Stable',

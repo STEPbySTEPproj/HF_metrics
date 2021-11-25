@@ -20,6 +20,17 @@ pip install -e src/pi_hf
 deactivate
 ```
 
+Under Windows:
+
+```term
+py -m venv venv
+.\venv\Scripts\activate
+pip install --upgrade pip
+pip install -r .\src\pi_hf\requirements.txt
+pip install -e .\src\pi_hf
+
+```
+
 ## Use
 
 Using the reference data provided with the repository, one can call:
@@ -30,6 +41,7 @@ run_pi_hf test/input/subject_1_platformData_exo.csv test/input/subject_1_platfor
 python3 src/pi_hf/pi_hf/script.py -edf test/input/subject_1_platformData_exo.csv -ndf test/input/subject_1_platformData_noexo.csv 
 --condition test/input/subject_1_condition.yaml --output_folder out
 ```
+
 ## Docker image
 
 ### Build from source
