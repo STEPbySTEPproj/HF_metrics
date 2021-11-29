@@ -35,13 +35,24 @@ deactivate
 
 ## Use
 
-Using the reference data provided with the repository, one can call:
+Using the reference data provided with the repository, one can call (assuming folder `out` exists):
 
 ```console
 run_hf test/input/subject_1_platformData_exo.csv test/input/subject_1_platformData_noexo.csv test/input/subject_1_condition.yaml out
 # if the python package, has not been installed as indicated
 python3 src/pi_hf/pi_hf/script.py -edf test/input/subject_1_platformData_exo.csv -ndf test/input/subject_1_platformData_noexo.csv --condition test/input/subject_1_condition.yaml --output_folder out
 # use py instead of python3 under windows
+```
+
+Similarly:
+
+```console
+run_lpp out
+# if package not installed
+python3 src/pi_hf/pi_hf/scriptLPP.py --output_folder out
+run_uei out
+# if package not installed
+python3 src/pi_hf/pi_hf/scriptUEI.py --output_folder out
 ```
 
 ## Docker image

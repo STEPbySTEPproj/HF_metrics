@@ -29,7 +29,8 @@ setup(
     #scripts=['script/run_pi_hf'],
     entry_points = {
         "console_scripts": ['run_hf = pi_hf.script:entry_point'],
-        #"console_scripts": ['run_check_hf = script.run_pi_hf:main'],
+        "console_scripts": ['run_lpp = pi_hf.scriptLPP:entry_point'],
+        "console_scripts": ['run_uei = pi_hf.scriptUEI:entry_point'],
     },
     include_package_data=True,
     classifiers=[
