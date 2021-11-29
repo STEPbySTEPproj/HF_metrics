@@ -11,6 +11,10 @@ else:
     with open(os.path.join(_here, 'README.md'), encoding='utf-8') as f:
         long_description = f.read()
 
+with open('requirements.txt', 'r') as f:
+    install_requires = f.read().splitlines()
+
+
 setup(
     name='pi_hf',
     version='0.0.0',
@@ -21,9 +25,11 @@ setup(
     url='https://github.com/',
     license='Beerware',
     packages= find_packages(),
-    scripts=['script/run_pi_hf'],
+    install_requires=install_requires,
+    #scripts=['script/run_pi_hf'],
     entry_points = {
-        "console_scripts": ['run_hf = pi_hf:main_script']
+        "console_scripts": ['run_hf = pi_hf.script:entry_point'],
+        #"console_scripts": ['run_check_hf = script.run_pi_hf:main'],
     },
     include_package_data=True,
     classifiers=[
