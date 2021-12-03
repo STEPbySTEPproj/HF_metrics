@@ -1,0 +1,15 @@
+itemID,type,options,text,answer_unit
+1.1,value,0 <= int < 10000,1.1. Time required to donning the exoskeleton.,sec
+1.2,value,0 <= int < 10,1.2. Time required to doffing the exoskeleton.,sec
+1.3,value,0 <= int < 6,1.3. Number of stair levels climbed up.,number
+1.4,value,0 <= int < 6,1.4. Number of stair levels climbed down.,number
+1.5,value,6 <= int < 12,1.5. Number of steps walked up.,number
+1.6,value,6 <= int < 12,1.6. Number of steps walked down.,number
+1.7,value,0 <= int < 10000,1.7. Number of times the user stumbled while ascending the stairs. ,number
+1.8,value,0 <= int < 10000,1.8. Number of times the user stumbled while descending the stairs.,number
+1.9,boolean,,1.9. Is the crutch used during the test?,boolean
+1.10,boolean,,1.10. In general, is the torso bent forward (provoke high load of upper limbs when crutches are used) to avoid falling backwards?,boolean
+1.11,boolean,,1.11. During the Anterolateral shifting of body centre of gravity, is the swing leg adequately relieved to correctly initiate the stride?,boolean
+1.12,value,0 <= int < 10000,1.12. Number of error messages sent by the HMI (Human-Machine Interface).,number
+1.13,value,0 <= int < 10000,1.13. Number of times the safe mode has been activated (the system switched off) when the situation did not require it?,number
+1.14,boolean,,1.14. Has the safe mode not been activated (the system did not switch off) when the situation did require it?,boolean

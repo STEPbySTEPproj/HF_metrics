@@ -1,0 +1,15 @@
+S,type,options,text,answer_unit
+A,value,0 <= int < 10,Shoulders,number
+B,value,0 <= int < 10,Right upper back,number
+C,value,0 <= int < 10,Right lower back and hip ,number
+D,value,0 <= int < 10,Right upper leg,number
+E,value,0 <= int < 10,Left upper leg ,number
+F,value,0 <= int < 10,Left lower back and hip ,number
+G,value,0 <= int < 10,Left upper back,number
+H,value,0 <= int < 10,Right lower arm,number
+I,value,0 <= int < 10,Right upper arm ,number
+J,value,0 <= int < 10,Right lower back and hip,number
+K,value,0 <= int < 10,Left lower back and hip ,number
+L,value,0 <= int < 10,Chest,number
+M,value,0 <= int < 10,Left upper arm,number
+N,value,0 <= int < 10,Left lower arm,number

@@ -15,10 +15,17 @@ import sys
 from termcolor import colored
 
 
+USAGE = """ usage: run it like: python3 src/pi_hf/pi_hf/scriptLPP.py --input_file test/input/inputs_1_LPP.csv  --output_folder out
+input_file file where the input csv file will be loaded
+output_folder:  folder where the output csv file will be stored
+"""
+
 def parse_args(args):
     parser = argparse.ArgumentParser()
+    parser.add_argument('--input_file', type=str, default=None,
+                        help='Name of the file where the input csv file will be loaded')
     parser.add_argument('--output_folder', type=str, default='./',
-                        help='Name of the folder where the output yaml file will be stored')
+                        help='Name of the folder where the output csv file will be stored')
     return parser.parse_args(args)
 
 
@@ -28,44 +35,60 @@ def load_data(filename):
 
 def checkInput(area, lowB, upB):
     while True:
-        var =  int(input(area))
-        if var >= lowB and var < upB:
+        var = int(input(area))
+        if lowB <= var < upB:
             return var
         else:
             print("value must be in [", lowB, ",", upB, "]")
 
 
-def getValues():
-    a = checkInput("Shoulders ", 0, 10)
-    b = checkInput("Right upper back ", 0, 10)
-    c = checkInput("Right lower back and hip ", 0, 10)
-    d = checkInput("Right upper leg ", 0, 10)
-    e = checkInput("Left upper leg ", 0, 10)
-    f = checkInput("Left lower back and hip ", 0, 10)
-    g = checkInput("Left upper back ", 0, 10)
-    h = checkInput("Right lower arm ", 0, 10)
-    i = checkInput("Right upper arm ", 0, 10)
-    j = checkInput("Right lower back and hip ", 0, 10)
-    k = checkInput("Left lower back and hip ", 0, 10)
-    l = checkInput("Chest ", 0, 10)
-    m = checkInput("Left upper arm ", 0, 10)
-    n = checkInput("Left lower arm ", 0, 10)
+def getValues(input_file=None):
+    if input_file is None:
+        a = checkInput("Shoulders ", 0, 10)
+        b = checkInput("Right upper back ", 0, 10)
+        c = checkInput("Right lower back and hip ", 0, 10)
+        d = checkInput("Right upper leg ", 0, 10)
+        e = checkInput("Left upper leg ", 0, 10)
+        f = checkInput("Left lower back and hip ", 0, 10)
+        g = checkInput("Left upper back ", 0, 10)
+        h = checkInput("Right lower arm ", 0, 10)
+        i = checkInput("Right upper arm ", 0, 10)
+        j = checkInput("Right lower back and hip ", 0, 10)
+        k = checkInput("Left lower back and hip ", 0, 10)
+        l = checkInput("Chest ", 0, 10)
+        m = checkInput("Left upper arm ", 0, 10)
+        n = checkInput("Left lower arm ", 0, 10)
+    else:
+        result = pd.read_csv(input_file, sep=',')
+        a = int(result[result["Type"] == "A"]["Value"])
+        b = int(result[result["Type"] == "B"]["Value"])
+        c = int(result[result["Type"] == "C"]["Value"])
+        f = int(result[result["Type"] == "F"]["Value"])
+        g = int(result[result["Type"] == "G"]["Value"])
+        d = int(result[result["Type"] == "D"]["Value"])
+        e = int(result[result["Type"] == "E"]["Value"])
+        h = int(result[result["Type"] == "H"]["Value"])
+        i = int(result[result["Type"] == "I"]["Value"])
+        m = int(result[result["Type"] == "M"]["Value"])
+        n = int(result[result["Type"] == "N"]["Value"])
+        j = int(result[result["Type"] == "J"]["Value"])
+        k = int(result[result["Type"] == "K"]["Value"])
+        l = int(result[result["Type"] == "L"]["Value"])
 
     return a, b, c, d, e, f, g, h, i, j, k, l, m, n
 
 
 def getThresholds(val):
-    if val >= 0 and val < 3:
+    if 0 <= val < 3:
         return "Low pressure"
-    elif val >= 3 and val < 5:
+    elif 3 <= val < 5:
         return "Medium pressure"
     else:
         return "High pressure"
 
 
 def main(config):
-
-    a, b, c, d, e, f, g, h, i, j, k, l, m, n = getValues()
+    a, b, c, d, e, f, g, h, i, j, k, l, m, n = getValues(config.input_file)
 
     back_shoulders_v = (a + b + c + f + g) / 5
     arm_v = (h + i + m + n) / 4
@@ -79,58 +102,92 @@ def main(config):
     belly_hips_t = getThresholds(belly_hips_v)
     legs_t = getThresholds(legs_v)
 
-    f_metrics_dict = {
-        'Back/Shoulders':
-            {
-                'A': a,
-                'B': b,
-                'C': c,
-                'F': f,
-                'H': h,
-                'Score': back_shoulders_v,
-                'Bench': back_shoulders_t
-            },
-        'Arm':
-            {
-                'H': a,
-                'I': b,
-                'M': c,
-                'N': f,
-                'Score': arm_v,
-                'Bench': arm_t
-            },
-        'Chest':
-            {
-                'L': l,
-                'Score': chest_v,
-                'Bench': chest_t
-            },
-        'Belly/Hips':
-            {
-                'J': j,
-                'K':k,
-                'Score': belly_hips_v,
-                'Bench': belly_hips_t
-            },
-        'Legs':
-            {
-                'D': d,
-                'E': e,
-                'Score': legs_v,
-                'Bench': legs_t
-            }
-    }
+    writeCSV(arm_t, arm_v, back_shoulders_t, back_shoulders_v, belly_hips_t, belly_hips_v, chest_t, chest_v, config,
+             legs_t, legs_v)
+
+    # region yaml creation, replaced by csv
+    # f_metrics_dict = {
+    #     'Back/Shoulders':
+    #         {
+    #             'A': a,
+    #             'B': b,
+    #             'C': c,
+    #             'F': f,
+    #             'G': g,
+    #             'Score': back_shoulders_v,
+    #             'Bench': back_shoulders_t
+    #         },
+    #     'Arm':
+    #         {
+    #             'H': h,
+    #             'I': i,
+    #             'M': m,
+    #             'N': n,
+    #             'Score': arm_v,
+    #             'Bench': arm_t
+    #         },
+    #     'Chest':
+    #         {
+    #             'L': l,
+    #             'Score': chest_v,
+    #             'Bench': chest_t
+    #         },
+    #     'Belly/Hips':
+    #         {
+    #             'J': j,
+    #             'K': k,
+    #             'Score': belly_hips_v,
+    #             'Bench': belly_hips_t
+    #         },
+    #     'Legs':
+    #         {
+    #             'D': d,
+    #             'E': e,
+    #             'Score': legs_v,
+    #             'Bench': legs_t
+    #         }
+    # }
+    #
+    # if not os.path.exists(config.output_folder):
+    #     os.makedirs(config.output_folder)
+    #
+    # file_output = config.output_folder + "/lpp.yaml"
+    # with open(file_output, 'w') as file:
+    #     yaml.dump(f_metrics_dict, file)
+    # endregion
+
+
+def writeCSV(arm_t, arm_v, back_shoulders_t, back_shoulders_v, belly_hips_t, belly_hips_v, chest_t, chest_v, config,
+             legs_t, legs_v):
+    result = pd.read_csv(config.input_file, sep=',')
+    mask = result.Area == "Arm"
+    result.loc[mask, "Score"] = arm_v
+    result.loc[mask, "Bench"] = arm_t
+    mask = result.Area == "Back/Shoulders"
+    result.loc[mask, "Score"] = back_shoulders_v
+    result.loc[mask, "Bench"] = back_shoulders_t
+    mask = result.Area == "Belly/Hips"
+    result.loc[mask, "Score"] = belly_hips_v
+    result.loc[mask, "Bench"] = belly_hips_t
+    mask = result.Area == "Chest"
+    result.loc[mask, "Score"] = chest_v
+    result.loc[mask, "Bench"] = chest_t
+    mask = result.Area == "Legs"
+    result.loc[mask, "Score"] = legs_v
+    result.loc[mask, "Bench"] = legs_t
+
+    s = config.input_file.split("_")[1]
 
     if not os.path.exists(config.output_folder):
         os.makedirs(config.output_folder)
 
-    file_output = config.output_folder + "/lpp.yaml"
-    with open(file_output, 'w') as file:
-        yaml.dump(f_metrics_dict, file)
+    result.to_csv(config.output_folder + "/" + s + "_questionnaire_LPP.csv", sep=",", index=False)
+
 
 USAGE = """ usage: run_lpp output_folder
 output_folder: folder where the generated PI yaml files will be stored
 """
+
 
 def entry_point():
     if len(sys.argv) != 2:
@@ -151,7 +208,6 @@ def entry_point():
             "{} is not a folder".format(folder_out),
             "red"))
         sys.exit(-1)
-
 
     l_argument = ['--output_folder', folder_out]
 
