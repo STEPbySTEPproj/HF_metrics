@@ -1,6 +1,9 @@
 # HF_metrics
 
-[script.py](script.py) takes as an input the data files (in .csv format) related to the HF protocols for both with and without the use of exoskeleton. Datafile names should be provided with .csv extension. Condition data file (in.yaml format) related to the execution time for asending/descending task is also required as an input.
+_To be extended to cover the two other scripts_
+[script.py](script.py) takes as an input the data files (in .csv format) related to the HF protocols for both with and without the use of exoskeleton.
+Datafile names should be provided with .csv extension.
+Condition data file (in.yaml format) related to the execution time for ascending/descending task is also required as an input.
 
 It then computes the related metrics. It also optionally accepts the output folder name.
 
@@ -14,22 +17,44 @@ Under Linux, a standard installation in a local environment is obtained using:
 python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
-pip install -r src/pi_hf/requirements.txt
 pip install -e src/pi_hf
-#once done
+# once done
+deactivate
+```
+
+Under Windows:
+
+```term
+py -m venv venv
+.\venv\Scripts\activate
+pip install -U --upgrade pip
+pip install -e .\src\pi_hf
+# once done
 deactivate
 ```
 
 ## Use
 
-Using the reference data provided with the repository, one can call:
+Using the reference data provided with the repository, one can call (assuming folder `out` exists):
 
 ```console
-run_pi_hf test/input/subject_1_platformData_exo.csv test/input/subject_1_platformData_noexo.csv test/input/subject_1_condition.yaml out
+run_hf test/input/subject_1_platformData_exo.csv test/input/subject_1_platformData_noexo.csv test/input/subject_1_condition.yaml out
 # if the python package, has not been installed as indicated
-python3 src/pi_hf/pi_hf/script.py -edf test/input/subject_1_platformData_exo.csv -ndf test/input/subject_1_platformData_noexo.csv 
---condition test/input/subject_1_condition.yaml --output_folder out
+python3 src/pi_hf/pi_hf/script.py -edf test/input/subject_1_platformData_exo.csv -ndf test/input/subject_1_platformData_noexo.csv --condition test/input/subject_1_condition.yaml --output_folder out
+# use py instead of python3 under windows
 ```
+
+Similarly:
+
+```console
+run_lpp out
+# if package not installed
+python3 src/pi_hf/pi_hf/scriptLPP.py --output_folder out
+run_uei out
+# if package not installed
+python3 src/pi_hf/pi_hf/scriptUEI.py --output_folder out
+```
+
 ## Docker image
 
 ### Build from source

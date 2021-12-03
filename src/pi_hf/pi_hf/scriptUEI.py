@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Created on Thu Sept  16 13:35:41 2021
 
@@ -13,6 +12,7 @@ import os
 import pandas as pd
 import yaml
 import sys
+from termcolor import colored
 
 
 def parse_args(args):
@@ -220,6 +220,37 @@ def main(config):
     file_output = config.output_folder + "/UEI.yaml"
     with open(file_output, 'w') as file:
         yaml.dump(f_metrics_dict, file)
+
+
+USAGE = """ usage: run_uei output_folder
+output_folder: folder where the generated PI yaml files will be stored
+"""
+
+def entry_point():
+    if len(sys.argv) != 2:
+        print(colored("Wrong input parameters !", "red"))
+        print(colored(USAGE, "yellow"))
+        sys.exit(1)
+
+    folder_out = sys.argv[1]
+
+    if not os.path.exists(folder_out):
+        print(colored(
+            "Output folder {} does not exist".format(folder_out),
+            "red"))
+        sys.exit(-1)
+
+    if not os.path.isdir(folder_out):
+        print(colored(
+            "{} is not a folder".format(folder_out),
+            "red"))
+        sys.exit(-1)
+
+
+    l_argument = ['--output_folder', folder_out]
+
+    args = parse_args(l_argument)
+    sys.exit(main(args))
 
 
 if __name__ == '__main__':
