@@ -47,7 +47,7 @@ def main(config):
     total_resp_df_no_exo = df_no_exo.filter(regex='total_responses')
     total_resp_correct_df_no_exo = df_no_exo.filter(regex='total_correct')
 
-    dim_df_no_exo = total_resp_df_no_exo[8:].size
+    dim_df_no_exo = total_resp_df_no_exo[8:].size # first 8 experiments are omitted
 
     total_resp_no_exo = total_resp_df_no_exo.iloc[dim_df_no_exo-1, :].values
     total_resp_correct_no_exo = total_resp_correct_df_no_exo.iloc[dim_df_no_exo-1, :].values
@@ -72,7 +72,7 @@ def main(config):
     total_resp_df_exo = df_exo.filter(regex='total_responses')
     total_resp_correct_df_exo = df_exo.filter(regex='total_correct')
 
-    dim_df_exo = total_resp_df_exo[8:].size
+    dim_df_exo = total_resp_df_exo[8:].size # first 8 experiments are omitted
 
     total_resp_exo = total_resp_df_exo.iloc[dim_df_no_exo-1, :].values
     total_resp_correct_exo = total_resp_correct_df_exo.iloc[dim_df_no_exo-1, :].values
