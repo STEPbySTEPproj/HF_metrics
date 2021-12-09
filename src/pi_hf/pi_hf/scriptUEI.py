@@ -293,18 +293,28 @@ def writeCSV(avg, avg_t, config, q1_10t, q1_11t, q1_12t, q1_13t, q1_14t, q1_1t, 
     result.to_csv(config.output_folder + "/" + s + "_questionnaire_UEI.csv", sep=",", index=False)
 
 
-USAGE = """ usage: run_uei output_folder
+ENTRY_USAGE = """ usage: run_uei input_file output_folder
+input_file: questionnaire data
 output_folder: folder where the generated PI yaml files will be stored
 """
 
 
 def entry_point():
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 3:
         print(colored("Wrong input parameters !", "red"))
-        print(colored(USAGE, "yellow"))
+        print(colored(ENTRY_USAGE, "yellow"))
         sys.exit(1)
 
-    folder_out = sys.argv[1]
+    file_in = sys.argv[1]
+    folder_out = sys.argv[2]
+
+    if not os.path.exists(file_in):
+        print(colored("Input file {} does not exist".format(file_in), "red"))
+        sys.exit(-1)
+
+    if not os.path.isfile(file_in):
+        print(colored("Input path {} is not a file".format(file_in), "red"))
+        sys.exit(-1)
 
     if not os.path.exists(folder_out):
         print(colored(
@@ -318,7 +328,7 @@ def entry_point():
             "red"))
         sys.exit(-1)
 
-    l_argument = ['--output_folder', folder_out]
+    l_argument = ['--input_file', file_in, '--output_folder', folder_out]
 
     args = parse_args(l_argument)
     sys.exit(main(args))

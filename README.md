@@ -48,12 +48,12 @@ python3 src/pi_hf/pi_hf/DualTaskscript.py -edf test/input/subject_1_platformData
 Similarly:
 
 ```console
-run_lpp out
-# if package not installed
-python3 src/pi_hf/pi_hf/scriptLPP.py --output_folder out
-run_uei out
-# if package not installed
-python3 src/pi_hf/pi_hf/scriptUEI.py --output_folder out
+run_lpp test/input/inputs_1_LPP.csv out
+# if package not installed (if input_file is not indicated, will read from command line)
+python3 src/pi_hf/pi_hf/scriptLPP.py --input_file test/input/inputs_1_LPP.csv --output_folder out
+run_uei test/input/inputs_1_UEI.csv out
+# if package not installed (if input_file is not indicated, will read from command line)
+python3 src/pi_hf/pi_hf/scriptUEI.py --input_file test/input/inputs_1_UEI.csv --output_folder out
 ```
 
 ## Docker image
