@@ -155,8 +155,18 @@ def main(config):
     else:
         avg_t = "Low EUI quality"
 
-    writeCSV(avg, avg_t, config, q1_10t, q1_11t, q1_12t, q1_13t, q1_14t, q1_1t, q1_2t, q1_3t, q1_4t, q1_5t, q1_6t,
-             q1_7t, q1_8t, q1_9t)
+    # writeCSV(avg, avg_t, config, q1_10t, q1_11t, q1_12t, q1_13t, q1_14t, q1_1t, q1_2t, q1_3t, q1_4t, q1_5t, q1_6t,
+    #          q1_7t, q1_8t, q1_9t)
+
+    str_score = 'type: scalar\n'
+    str_score += f'value: {avg:.1f}\n'
+
+    if not os.path.exists(config.output_folder):
+        os.makedirs(config.output_folder)
+
+    file_output = config.output_folder + "/pi_uei.yaml"
+    with open(file_output, 'w') as file:
+        file.write(str_score)
 
     # region yaml creation, replaced by csv
     # f_metrics_dict = {
