@@ -21,37 +21,77 @@ limitations under the License.
  {% block app_content %}
 
  <div class="jumbotron">
-       <div class="container">
+ <div class="container">
 
+  <style>
+    label{
+      display: None;
+    }
+    </style>
  <h1>Questionnaire LPP </h1>
- <p>Surprisingly it works!</p>
+
+ <p>The following survey aims at investigating the perceived levels of pressure when using the Exoskeleton.
+  Please write a number inside each of the colored areas.
+  The number should express the pressure you felt, according to the scale on the right.
+  “0” corresponds to “No pressure at all”, while “10” corresponds to Maximal Pressure</p>
+
+  <table style="width:100%">
+  <tr>
+    <th>score</th>
+    <th> </th>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>No pressure at all</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Very, very weak pressure</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Very weak pressure</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Weak pressure</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Moderate pressure</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>Somewhat string pressure</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>Strong pressure</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>Very strong pressure</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>Very, very strong pressure</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>Almost maximal pressure</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>Maximal pressure</td>
+  </tr>
+</table>
+
  </div>
  </div>
 
  <form action="" method="POST" enctype="multipart/form-data" >
   {{ form.hidden_tag() }}
 
-  <table>
-    <tr>
-      <th>Area </th>
-      <th> Score</th>
-    </tr>
-    <tr>
-      <td>Shoulders</td>
-      <td> {{ wtf.form_field(form.a) }} </td>
-    </tr>
-    <tr>
-      <td>Right upper back</td>
-      <td> {{ wtf.form_field(form.b) }} </td>
-    </tr>
-  </table>
-<!--
-  <h2> A area </h2>
-  {{ wtf.form_field(form.a) }}
-  <h2> B area </h2>
-  {{ wtf.form_field(form.b) }} -->
-
- <div>
 
   {% if form.validated %}
   <p>Data validated</p>
@@ -62,7 +102,77 @@ limitations under the License.
   <p>Data NOT validated</p>
   {% endif %}
 
+
+
+  <div style='float:left'>
+  <img src="{{url_for('static', filename='lpp.png')}}" align="middle" />
+  </div>
+  <div style='float:right'>
+
+  <table>
+    <tr>
+      <th>Area </th>
+      <th> Score</th>
+    </tr>
+    <tr>
+      <td>Shoulders</td>
+      <td>{{ wtf.form_field(form.a) }}</td>
+    </tr>
+    <tr>
+      <td>Right upper back</td>
+      <td>{{ wtf.form_field(form.b) }}</td>
+    </tr>
+    <tr>
+      <td>Right lower back and hip</td>
+      <td>{{ wtf.form_field(form.c) }}</td>
+    </tr>
+    <tr>
+      <td>Right upper leg</td>
+      <td>{{ wtf.form_field(form.d) }}</td>
+    </tr>
+    <tr>
+      <td>Left upper leg</td>
+      <td>{{ wtf.form_field(form.e) }}</td>
+    </tr>
+    <tr>
+      <td>Left lowerback and hip</td>
+      <td>{{ wtf.form_field(form.f) }}</td>
+    </tr>
+    <tr>
+      <td>Left upper back</td>
+      <td>{{ wtf.form_field(form.g) }}</td>
+    </tr>
+    <tr>
+      <td>Right lower arm</td>
+      <td>{{ wtf.form_field(form.h) }}</td>
+    </tr>
+    <tr>
+      <td>Right upper arm</td>
+      <td>{{ wtf.form_field(form.i) }}</td>
+    </tr>
+    <tr>
+      <td>Right lower back and hip</td>
+      <td>{{ wtf.form_field(form.j) }}</td>
+    </tr>
+    <tr>
+      <td>Left lower back and hip</td>
+      <td>{{ wtf.form_field(form.k) }}</td>
+    </tr>
+    <tr>
+      <td>Chest </td>
+      <td>{{ wtf.form_field(form.l) }}</td>
+    </tr>
+    <tr>
+      <td>Left upper arm</td>
+      <td>{{ wtf.form_field(form.m) }}</td>
+    </tr>
+    <tr>
+      <td>Left lower arm</td>
+      <td>{{ wtf.form_field(form.n) }}</td>
+    </tr>
+  </table>
   <p>{{ form.submit() }}</p>
+</div>
 
  </div>
 
