@@ -1,0 +1,71 @@
+<!--
+Copyright 2019 Tecnalia Research and Innovation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+ -->
+
+
+ {% extends "base.html" %}
+ {% import 'bootstrap/wtf.html' as wtf %}
+
+ {% block app_content %}
+
+ <div class="jumbotron">
+       <div class="container">
+
+ <h1>Questionnaire LPP </h1>
+ <p>Surprisingly it works!</p>
+ </div>
+ </div>
+
+ <form action="" method="POST" enctype="multipart/form-data" >
+  {{ form.hidden_tag() }}
+
+  <table>
+    <tr>
+      <th>Area </th>
+      <th> Score</th>
+    </tr>
+    <tr>
+      <td>Shoulders</td>
+      <td> {{ wtf.form_field(form.a) }} </td>
+    </tr>
+    <tr>
+      <td>Right upper back</td>
+      <td> {{ wtf.form_field(form.b) }} </td>
+    </tr>
+  </table>
+<!--
+  <h2> A area </h2>
+  {{ wtf.form_field(form.a) }}
+  <h2> B area </h2>
+  {{ wtf.form_field(form.b) }} -->
+
+ <div>
+
+  {% if form.validated %}
+  <p>Data validated</p>
+  <p><a class="btn btn-primary btn-lg" href="{{ url_for('download') }}" role="button">Download &raquo;</a></p>
+  <p><a class="btn btn-primary btn-lg" href="{{ url_for('select_questionnaire') }}" role="button">Back &raquo;</a></p>
+
+  {% else %}
+  <p>Data NOT validated</p>
+  {% endif %}
+
+  <p>{{ form.submit() }}</p>
+
+ </div>
+
+ 
+</form>
+ {% endblock %}
