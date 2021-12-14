@@ -74,6 +74,8 @@ Assuming `test/input` contains the input data, and that the directory `out/` is 
 
 ```shell
 docker run --rm -v $PWD/test/input:/in -v $PWD/out:/out pi_sbs_hf run_pi_hf /in/subject_1_platformData_exo.csv /insubject_1_platformData_noexo.csv /in/subject_1_condition.yaml /out
+docker run --rm -v $PWD/test/input:/in -v $PWD/out:/out pi_sbs_hf run_lpp /in/inputs_1_LPP.csv /out
+docker run --rm -v $PWD/test/input:/in -v $PWD/out:/out pi_sbs_hf run_uei /in/inputs_1_UEI.csv /out
 ```
 
 ## Acknowledgements
