@@ -1,0 +1,3 @@
+type: vector
+label: [back_shoulders, arm, chest, belly_hips, legs]
+value: [2.0, 2.0, 2.0, 2.0, 2.0]

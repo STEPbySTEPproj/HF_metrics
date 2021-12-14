@@ -87,6 +87,7 @@ def getThresholds(val):
         return "High pressure"
 
 
+
 def main(config):
     a, b, c, d, e, f, g, h, i, j, k, l, m, n = getValues(config.input_file)
 
@@ -102,60 +103,19 @@ def main(config):
     belly_hips_t = getThresholds(belly_hips_v)
     legs_t = getThresholds(legs_v)
 
-    writeCSV(arm_t, arm_v, back_shoulders_t, back_shoulders_v, belly_hips_t, belly_hips_v, chest_t, chest_v, config,
-             legs_t, legs_v)
+    # writeCSV(arm_t, arm_v, back_shoulders_t, back_shoulders_v, belly_hips_t, belly_hips_v, chest_t, chest_v, config,
+    #         legs_t, legs_v)
 
-    # region yaml creation, replaced by csv
-    # f_metrics_dict = {
-    #     'Back/Shoulders':
-    #         {
-    #             'A': a,
-    #             'B': b,
-    #             'C': c,
-    #             'F': f,
-    #             'G': g,
-    #             'Score': back_shoulders_v,
-    #             'Bench': back_shoulders_t
-    #         },
-    #     'Arm':
-    #         {
-    #             'H': h,
-    #             'I': i,
-    #             'M': m,
-    #             'N': n,
-    #             'Score': arm_v,
-    #             'Bench': arm_t
-    #         },
-    #     'Chest':
-    #         {
-    #             'L': l,
-    #             'Score': chest_v,
-    #             'Bench': chest_t
-    #         },
-    #     'Belly/Hips':
-    #         {
-    #             'J': j,
-    #             'K': k,
-    #             'Score': belly_hips_v,
-    #             'Bench': belly_hips_t
-    #         },
-    #     'Legs':
-    #         {
-    #             'D': d,
-    #             'E': e,
-    #             'Score': legs_v,
-    #             'Bench': legs_t
-    #         }
-    # }
-    #
-    # if not os.path.exists(config.output_folder):
-    #     os.makedirs(config.output_folder)
-    #
-    # file_output = config.output_folder + "/lpp.yaml"
-    # with open(file_output, 'w') as file:
-    #     yaml.dump(f_metrics_dict, file)
-    # endregion
+    str_score = "type: vector\n"
+    str_score += 'label: [back_shoulders, arm, chest, belly_hips, legs]\n'
+    str_score += f'value: [{back_shoulders_v:.1f}, {arm_v:.1f}, {chest_v:.1f}, {belly_hips_v:.1f}, {legs_v:.1f}]\n'
 
+    if not os.path.exists(config.output_folder):
+        os.makedirs(config.output_folder)
+
+    file_output = config.output_folder + "/pi_lpp.yaml"
+    with open(file_output, 'w') as file:
+        file.write(str_score)
 
 def writeCSV(arm_t, arm_v, back_shoulders_t, back_shoulders_v, belly_hips_t, belly_hips_v, chest_t, chest_v, config,
              legs_t, legs_v):
