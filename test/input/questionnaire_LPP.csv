@@ -1,4 +1,4 @@
-S,type,options,text,answer_unit
+itemID,type,options,text,answer_unit
 A,value,0 <= int < 10,Shoulders,number
 B,value,0 <= int < 10,Right upper back,number
 C,value,0 <= int < 10,Right lower back and hip ,number

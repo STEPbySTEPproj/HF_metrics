@@ -3,7 +3,7 @@ Created on Thu Sept  16 12:10:41 2021
 
 @author: marco
 This script requires only --output_folder option.
-run it like: python3 src/pi_hf/pi_hf/scriptLPP.py  --output_folder out
+run it like: python3 src/pi_hf/pi_hf/scriptLPP.py --input_file test/input/inputs_1_LPP.csv  --output_folder out
 
 """
 
@@ -60,20 +60,20 @@ def getValues(input_file=None):
         n = checkInput("Left lower arm ", 0, 10)
     else:
         result = pd.read_csv(input_file, sep=',')
-        a = int(result[result["Type"] == "A"]["Value"])
-        b = int(result[result["Type"] == "B"]["Value"])
-        c = int(result[result["Type"] == "C"]["Value"])
-        f = int(result[result["Type"] == "F"]["Value"])
-        g = int(result[result["Type"] == "G"]["Value"])
-        d = int(result[result["Type"] == "D"]["Value"])
-        e = int(result[result["Type"] == "E"]["Value"])
-        h = int(result[result["Type"] == "H"]["Value"])
-        i = int(result[result["Type"] == "I"]["Value"])
-        m = int(result[result["Type"] == "M"]["Value"])
-        n = int(result[result["Type"] == "N"]["Value"])
-        j = int(result[result["Type"] == "J"]["Value"])
-        k = int(result[result["Type"] == "K"]["Value"])
-        l = int(result[result["Type"] == "L"]["Value"])
+        a = int(result[result["itemID"] == "A"]["answer"])
+        b = int(result[result["itemID"] == "B"]["answer"])
+        c = int(result[result["itemID"] == "C"]["answer"])
+        f = int(result[result["itemID"] == "F"]["answer"])
+        g = int(result[result["itemID"] == "G"]["answer"])
+        d = int(result[result["itemID"] == "D"]["answer"])
+        e = int(result[result["itemID"] == "E"]["answer"])
+        h = int(result[result["itemID"] == "H"]["answer"])
+        i = int(result[result["itemID"] == "I"]["answer"])
+        m = int(result[result["itemID"] == "M"]["answer"])
+        n = int(result[result["itemID"] == "N"]["answer"])
+        j = int(result[result["itemID"] == "J"]["answer"])
+        k = int(result[result["itemID"] == "K"]["answer"])
+        l = int(result[result["itemID"] == "L"]["answer"])
 
     return a, b, c, d, e, f, g, h, i, j, k, l, m, n
 
