@@ -1,13 +1,29 @@
 from flask import Flask, render_template, Response
 from flask_bootstrap import Bootstrap
-from questionnaire.forms import formLPP
+from questionnaire.forms import formLPP, formUEI
 from io import StringIO
+
+
 class LPPData:
     def __init__(self):
 
         self.data = list()
-        self.a = 5
-        self.b = 5
+
+    def generate_file(self):
+
+        msg = "Type,Value\n"
+
+        for item in self.data:
+            msg += '{},{}\n'.format(item[0], item[1])
+        file_buffer = StringIO(msg)
+        file_buffer.seek(0)
+        return file_buffer
+
+
+class UEIData:
+    def __init__(self):
+
+        self.data = list()
 
     def generate_file(self):
 
@@ -19,9 +35,30 @@ class LPPData:
         file_buffer.seek(0)
         return file_buffer
 
+    def score(self, id, score):
+
+        scoring_map = {'1.1': {'c1': 1, 'c2': 2, 'c3':3},
+                       '1.2': {'c1': 1, 'c2': 2, 'c3':3},
+                       '1.3': {'c1': 1, 'c2': 2, 'c3':3},
+                       '1.4': {'c1': 1, 'c2': 2, 'c3':3},
+                       '1.5': {'c1': 1, 'c2': 2, 'c3':3},
+                       '1.6': {'c1': 1, 'c2': 2, 'c3':3},
+                       '1.7': {'c1': 1, 'c2': 2, 'c3':3},
+                       '1.8': {'c1': 1, 'c2': 2, 'c3':3},
+                       '1.9': {'c1': 1, 'c2': 3},
+                       '1.10': {'c1': 1, 'c2': 3},
+                       '1.11': {'c1': 1, 'c2': 3},
+                       '1.12': {'c1': 1, 'c2': 2, 'c3':3},
+                       '1.13': {'c1': 1, 'c2': 2, 'c3':3},
+                       '1.14': {'c1': 1, 'c2': 3},
+                      }
+        id_score = scoring_map[id]
+        return id_score[score]
+
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 lpp_val = LPPData()
+uei_val = UEIData()
 
 @app.route('/')
 @app.route('/index')
@@ -39,20 +76,21 @@ def questionnaire_lpp():
     print("here")
 
     if form.validate_on_submit():
-        lpp_val.data.append(['a',form.a.data])
-        lpp_val.data.append(['b',form.b.data])
-        lpp_val.data.append(['c',form.c.data])
-        lpp_val.data.append(['d',form.d.data])
-        lpp_val.data.append(['e',form.e.data])
-        lpp_val.data.append(['f',form.f.data])
-        lpp_val.data.append(['g',form.g.data])
-        lpp_val.data.append(['h',form.h.data])
-        lpp_val.data.append(['i',form.i.data])
-        lpp_val.data.append(['j',form.j.data])
-        lpp_val.data.append(['k',form.k.data])
-        lpp_val.data.append(['l',form.l.data])
-        lpp_val.data.append(['m',form.m.data])
-        lpp_val.data.append(['n',form.n.data])
+        lpp_val.data.clear()
+        lpp_val.data.append(['A',form.a.data])
+        lpp_val.data.append(['B',form.b.data])
+        lpp_val.data.append(['C',form.c.data])
+        lpp_val.data.append(['D',form.d.data])
+        lpp_val.data.append(['E',form.e.data])
+        lpp_val.data.append(['F',form.f.data])
+        lpp_val.data.append(['G',form.g.data])
+        lpp_val.data.append(['H',form.h.data])
+        lpp_val.data.append(['I',form.i.data])
+        lpp_val.data.append(['J',form.j.data])
+        lpp_val.data.append(['K',form.k.data])
+        lpp_val.data.append(['L',form.l.data])
+        lpp_val.data.append(['M',form.m.data])
+        lpp_val.data.append(['N',form.n.data])
 
         print("Data Validated")
         print(lpp_val.data)
@@ -61,11 +99,44 @@ def questionnaire_lpp():
 
 @app.route('/questionnaire_uei', methods=['GET', 'POST'])
 def questionnaire_uei():
-    return render_template('questionnaire_uei.html')
+    form = formUEI()
+    print("UHEI: here")
+    if form.validate_on_submit():
+        print("Data validated")
+        uei_val.data.clear()
+        uei_val.data.append(['1.1',uei_val.score('1.1', form.a.data)])
+        uei_val.data.append(['1.2',uei_val.score('1.2', form.b.data)])
+        uei_val.data.append(['1.3',uei_val.score('1.3', form.c.data)])
+        uei_val.data.append(['1.4',uei_val.score('1.4', form.d.data)])
+        uei_val.data.append(['1.5',uei_val.score('1.5', form.e.data)])
+        uei_val.data.append(['1.6',uei_val.score('1.6', form.f.data)])
+        uei_val.data.append(['1.7',uei_val.score('1.7', form.g.data)])
+        uei_val.data.append(['1.8',uei_val.score('1.8', form.h.data)])
+        uei_val.data.append(['1.9',uei_val.score('1.9', form.i.data)])
+        uei_val.data.append(['1.10',uei_val.score('1.10', form.j.data)])
+        uei_val.data.append(['1.11',uei_val.score('1.11', form.k.data)])
+        uei_val.data.append(['1.12',uei_val.score('1.12', form.l.data)])
+        uei_val.data.append(['1.13',uei_val.score('1.13', form.m.data)])
+        uei_val.data.append(['1.14',uei_val.score('1.14', form.n.data)])
+
+        form.validated = True
+
+    return render_template('questionnaire_uei.html', form=form)
 
 @app.route("/download", methods=['GET', 'POST'])
 def download(file_name='lpp'):
     generated_file = lpp_val.generate_file()
+    response = Response(generated_file, mimetype="text/csv")
+    # add a filename
+    response.headers.set(
+        "Content-Disposition", "attachment", filename="{0}.csv".format(file_name)
+    )
+    return response
+
+
+@app.route("/download_uei", methods=['GET', 'POST'])
+def download_uei(file_name='uei'):
+    generated_file = uei_val.generate_file()
     response = Response(generated_file, mimetype="text/csv")
     # add a filename
     response.headers.set(

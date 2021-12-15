@@ -79,6 +79,7 @@ def getValues(input_file=None):
             "1.14. Has the safe mode not been activated (the system did not switch off) when the situation did require it?")
     else:
         result = pd.read_csv(input_file, sep=',')
+        print(result["Type"] == "1.1")
         q1_1 = int(result[result["Type"] == "1.1"]["Value"])
         q1_2 = int(result[result["Type"] == "1.2"]["Value"])
         q1_3 = int(result[result["Type"] == "1.3"]["Value"])
