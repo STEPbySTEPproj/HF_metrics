@@ -13,7 +13,7 @@ import yaml
 import sys
 from termcolor import colored
 
-USAGE = """ usage: run it like: src/pi_hf/pi_hf/scriptUEI.py --input_file test/input/inputs_1_UEI.csv  --output_folder out
+USAGE = """ usage: run it like:python3 src/pi_hf/pi_hf/scriptUEI.py --input_file test/input/inputs_1_UEI.csv  --output_folder out
 input_file file where the input csv file will be loaded
 output_folder:  folder where the output csv file will be stored
 """
@@ -79,21 +79,20 @@ def getValues(input_file=None):
             "1.14. Has the safe mode not been activated (the system did not switch off) when the situation did require it?")
     else:
         result = pd.read_csv(input_file, sep=',')
-        print(result["Type"] == "1.1")
-        q1_1 = int(result[result["Type"] == "1.1"]["Value"])
-        q1_2 = int(result[result["Type"] == "1.2"]["Value"])
-        q1_3 = int(result[result["Type"] == "1.3"]["Value"])
-        q1_4 = int(result[result["Type"] == "1.4"]["Value"])
-        q1_5 = int(result[result["Type"] == "1.5"]["Value"])
-        q1_6 = int(result[result["Type"] == "1.6"]["Value"])
-        q1_7 = int(result[result["Type"] == "1.7"]["Value"])
-        q1_8 = int(result[result["Type"] == "1.8"]["Value"])
-        q1_9 = bool(int(result[result["Type"] == "1.9"]["Value"]))
-        q1_10 = bool(int(result[result["Type"] == "1.10"]["Value"]))
-        q1_11 = bool(int(result[result["Type"] == "1.11"]["Value"]))
-        q1_12 = int(result[result["Type"] == "1.12"]["Value"])
-        q1_13 = int(result[result["Type"] == "1.13"]["Value"])
-        q1_14 = bool(int(result[result["Type"] == "1.14"]["Value"]))
+        q1_1 = int(result[result["itemID"] == 1]["answer"])
+        q1_2 = int(result[result["itemID"] == 2]["answer"])
+        q1_3 = int(result[result["itemID"] == 3]["answer"])
+        q1_4 = int(result[result["itemID"] == 4]["answer"])
+        q1_5 = int(result[result["itemID"] == 5]["answer"])
+        q1_6 = int(result[result["itemID"] == 6]["answer"])
+        q1_7 = int(result[result["itemID"] == 7]["answer"])
+        q1_8 = int(result[result["itemID"] == 8]["answer"])
+        q1_9 = bool(int(result[result["itemID"] == 9]["answer"]))
+        q1_10 = bool(int(result[result["itemID"] == 10]["answer"]))
+        q1_11 = bool(int(result[result["itemID"] == 11]["answer"]))
+        q1_12 = int(result[result["itemID"] == 12]["answer"])
+        q1_13 = int(result[result["itemID"] == 13]["answer"])
+        q1_14 = bool(int(result[result["itemID"] == 14]["answer"]))
     return q1_1, q1_2, q1_3, q1_4, q1_5, q1_6, q1_7, q1_8, q1_9, q1_10, q1_11, q1_12, q1_13, q1_14
 
 
