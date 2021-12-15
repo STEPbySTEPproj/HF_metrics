@@ -11,7 +11,7 @@ class LPPData:
 
     def generate_file(self):
 
-        msg = "Type,Value\n"
+        msg = "itemID,answer\n"
 
         for item in self.data:
             msg += '{},{}\n'.format(item[0], item[1])
@@ -27,30 +27,30 @@ class UEIData:
 
     def generate_file(self):
 
-        msg = "type;value\n"
+        msg = "itemID,answer\n"
 
         for item in self.data:
-            msg += '{};{}\n'.format(item[0], item[1])
+            msg += '{},{}\n'.format(item[0], item[1])
         file_buffer = StringIO(msg)
         file_buffer.seek(0)
         return file_buffer
 
     def score(self, id, score):
 
-        scoring_map = {'1.1': {'c1': 1, 'c2': 2, 'c3':3},
-                       '1.2': {'c1': 1, 'c2': 2, 'c3':3},
-                       '1.3': {'c1': 1, 'c2': 2, 'c3':3},
-                       '1.4': {'c1': 1, 'c2': 2, 'c3':3},
-                       '1.5': {'c1': 1, 'c2': 2, 'c3':3},
-                       '1.6': {'c1': 1, 'c2': 2, 'c3':3},
-                       '1.7': {'c1': 1, 'c2': 2, 'c3':3},
-                       '1.8': {'c1': 1, 'c2': 2, 'c3':3},
-                       '1.9': {'c1': 1, 'c2': 3},
-                       '1.10': {'c1': 1, 'c2': 3},
-                       '1.11': {'c1': 1, 'c2': 3},
-                       '1.12': {'c1': 1, 'c2': 2, 'c3':3},
-                       '1.13': {'c1': 1, 'c2': 2, 'c3':3},
-                       '1.14': {'c1': 1, 'c2': 3},
+        scoring_map = {'1': {'c1': 1, 'c2': 2, 'c3':3},
+                       '2': {'c1': 1, 'c2': 2, 'c3':3},
+                       '3': {'c1': 1, 'c2': 2, 'c3':3},
+                       '4': {'c1': 1, 'c2': 2, 'c3':3},
+                       '5': {'c1': 1, 'c2': 2, 'c3':3},
+                       '6': {'c1': 1, 'c2': 2, 'c3':3},
+                       '7': {'c1': 1, 'c2': 2, 'c3':3},
+                       '8': {'c1': 1, 'c2': 2, 'c3':3},
+                       '9': {'c1': 1, 'c2': 3},
+                       '10': {'c1': 1, 'c2': 3},
+                       '11': {'c1': 1, 'c2': 3},
+                       '12': {'c1': 1, 'c2': 2, 'c3':3},
+                       '13': {'c1': 1, 'c2': 2, 'c3':3},
+                       '14': {'c1': 1, 'c2': 3},
                       }
         id_score = scoring_map[id]
         return id_score[score]
@@ -104,20 +104,20 @@ def questionnaire_uei():
     if form.validate_on_submit():
         print("Data validated")
         uei_val.data.clear()
-        uei_val.data.append(['1.1',uei_val.score('1.1', form.a.data)])
-        uei_val.data.append(['1.2',uei_val.score('1.2', form.b.data)])
-        uei_val.data.append(['1.3',uei_val.score('1.3', form.c.data)])
-        uei_val.data.append(['1.4',uei_val.score('1.4', form.d.data)])
-        uei_val.data.append(['1.5',uei_val.score('1.5', form.e.data)])
-        uei_val.data.append(['1.6',uei_val.score('1.6', form.f.data)])
-        uei_val.data.append(['1.7',uei_val.score('1.7', form.g.data)])
-        uei_val.data.append(['1.8',uei_val.score('1.8', form.h.data)])
-        uei_val.data.append(['1.9',uei_val.score('1.9', form.i.data)])
-        uei_val.data.append(['1.10',uei_val.score('1.10', form.j.data)])
-        uei_val.data.append(['1.11',uei_val.score('1.11', form.k.data)])
-        uei_val.data.append(['1.12',uei_val.score('1.12', form.l.data)])
-        uei_val.data.append(['1.13',uei_val.score('1.13', form.m.data)])
-        uei_val.data.append(['1.14',uei_val.score('1.14', form.n.data)])
+        uei_val.data.append(['1',uei_val.score('1', form.a.data)])
+        uei_val.data.append(['2',uei_val.score('2', form.b.data)])
+        uei_val.data.append(['3',uei_val.score('3', form.c.data)])
+        uei_val.data.append(['4',uei_val.score('4', form.d.data)])
+        uei_val.data.append(['5',uei_val.score('5', form.e.data)])
+        uei_val.data.append(['6',uei_val.score('6', form.f.data)])
+        uei_val.data.append(['7',uei_val.score('7', form.g.data)])
+        uei_val.data.append(['8',uei_val.score('8', form.h.data)])
+        uei_val.data.append(['9',uei_val.score('9', form.i.data)])
+        uei_val.data.append(['10',uei_val.score('10', form.j.data)])
+        uei_val.data.append(['11',uei_val.score('11', form.k.data)])
+        uei_val.data.append(['12',uei_val.score('12', form.l.data)])
+        uei_val.data.append(['13',uei_val.score('13', form.m.data)])
+        uei_val.data.append(['14',uei_val.score('14', form.n.data)])
 
         form.validated = True
 
