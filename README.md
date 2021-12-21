@@ -4,7 +4,7 @@ _To be extended to cover the two other scripts_
 
 [DualTaskscript.py](src/pi_hf/DualTaskscript.py) takes as an input the data files (in .csv format) related to the HF protocols for both with and without the use of exoskeleton.
 Datafile names should be provided with .csv extension.
-Condition data file (in.yaml format) related to the execution time for ascending/descending task is also required as an input.
+Condition data file (in .yaml format) related to the execution time for ascending/descending task is also required as an input.
 
 It then computes the related metrics. It also optionally accepts the output folder name.
 
@@ -58,6 +58,7 @@ python3 src/pi_hf/pi_hf/scriptUEI.py --input_file test/input/inputs_1_UEI.csv --
 
 ## Docker image
 
+The use of Docker image is only available for Linux machine
 ### Build from source
 
 _(only tested under Linux)_
@@ -66,6 +67,14 @@ Run the following command in order to create the docker image for this PI:
 
 ```console
 docker build . -t pi_sbs_hf
+```
+
+### Get official image
+
+An image ready to be used is available on Docker Hub, and can be directly installed and used:
+
+```console
+docker pull eurobenchtest/pi_sbs_human_factor
 ```
 
 ### Launch the docker image
