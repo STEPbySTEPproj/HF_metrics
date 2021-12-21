@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<test_plan>
+
+    <test pi_name="run_lpp"
+          parameters="/in/inputs_1_LPP.csv /out"
+          input_folder="input"
+          output_folder="lpp/output"/>
+
+    <test pi_name="run_uei"
+          parameters="/in/inputs_1_UEI.csv /out"
+          input_folder="input"
+          output_folder="uei/output"/>
+
+</test_plan>
