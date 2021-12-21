@@ -24,7 +24,7 @@ jobs:
       env:
         # not accepted as the repo contains uppercase letters
         #REPO_NAME: ${{ github.event.repository.name }}
-        REPO_NAME: pi_sbs_hf
+        REPO_NAME: pi_sbs_human_factor
         REPO_BRANCH: ${{ github.head_ref }}
       run: docker build . --file Dockerfile --tag $REPO_NAME:$REPO_BRANCH
 
@@ -36,5 +36,5 @@ jobs:
         TEST_PLAN: test/test_plan.xml
         #not accepted as the repo contains uppercase letters
         #DOCKER_IMAGE: ${{ github.event.repository.name }}:${{ github.head_ref }}
-        DOCKER_IMAGE: pi_sbs_hf:${{ github.head_ref }}
+        DOCKER_IMAGE: pi_sbs_human_factor:${{ github.head_ref }}
       run:  python3 test_docker_call.py
