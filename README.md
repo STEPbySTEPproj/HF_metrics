@@ -58,6 +58,12 @@ run_uei test/input/inputs_1_UEI.csv out
 # if package not installed (if input_file is not indicated, will read from command line)
 python3 src/pi_hf/pi_hf/scriptUEI.py --input_file test/input/inputs_1_UEI.csv --output_folder out
 ```
+Note that the uei script expect values already proprecessed (i.e values in `[1,2,3]`).
+To use raw data:
+
+```console
+run_uei test/input/inputs_1_UEI_raw.csv False out
+```
 
 ## Docker image
 
