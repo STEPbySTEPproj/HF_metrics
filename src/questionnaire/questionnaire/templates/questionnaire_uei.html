@@ -1,0 +1,71 @@
+<!--
+Copyright 2019 Tecnalia Research and Innovation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+ -->
+
+
+ {% extends "base.html" %}
+ {% import 'bootstrap/wtf.html' as wtf %}
+
+ {% block app_content %}
+
+ <div class="jumbotron">
+ <div class="container">
+
+ <h1>Questionnaire UEI </h1>
+ <p>Fill all items</p>
+ </div>
+ </div>
+
+
+ <form action="" method="POST" enctype="multipart/form-data" >
+  {{ form.hidden_tag() }}
+
+
+  {% if form.validated %}
+  <p>Data validated</p>
+  <p><a class="btn btn-primary btn-lg" href="{{ url_for('download_uei') }}" role="button">Download &raquo;</a></p>
+
+  {% else %}
+  <p>Data to be completed</p>
+  {% endif %}
+
+<table style="width:100%">
+{% for field in form if field.name != "csrf_token" %}
+{% if field.name != 'submit' %}
+<tr>
+  <td colspan=3>{{ field.label() }} </td>
+</tr>
+<tr>
+  {% for subfield in field %}
+    <td>{{ subfield.label }}</td>
+  {% endfor %}
+</tr>
+<tr>
+  {% for subfield in field %}
+    <td>{{ subfield }}</td>
+  {% endfor %}
+</tr>
+{% endif %}
+{% endfor %}
+</table>
+
+<p>{{ form.submit() }}</p>
+ </form>
+
+ <div>
+   <p><a class="btn btn-primary btn-lg" href="{{ url_for('select_questionnaire') }}" role="button">Back &raquo;</a></p>
+ </div>
+
+ {% endblock %}

@@ -6,7 +6,10 @@ _To be extended to cover the two other scripts_
 Datafile names should be provided with .csv extension.
 Condition data file (in .yaml format) related to the execution time for ascending/descending task is also required as an input.
 
-It then computes the related metrics. It also optionally accepts the output folder name.
+It then computes the related metrics.
+It also optionally accepts the output folder name.
+
+2 other algorithms are also proposed, `uei` and `lpp` (to be detailed).
 
 ## Installation
 
@@ -82,10 +85,24 @@ docker pull eurobenchtest/pi_sbs_human_factor
 Assuming `test/input` contains the input data, and that the directory `out/` is **already created**, and will contain the PI output:
 
 ```shell
-docker run --rm -v $PWD/test/input:/in -v $PWD/out:/out pi_sbs_hf run_pi_hf /in/subject_1_platformData_exo.csv /insubject_1_platformData_noexo.csv /in/subject_1_condition.yaml /out
+docker run --rm -v $PWD/test/input:/in -v $PWD/out:/out pi_sbs_hf run_pi_hf /in/subject_1_platformData_exo.csv /in/subject_1_platformData_noexo.csv /in/subject_1_condition.yaml /out
 docker run --rm -v $PWD/test/input:/in -v $PWD/out:/out pi_sbs_hf run_lpp /in/inputs_1_LPP.csv /out
 docker run --rm -v $PWD/test/input:/in -v $PWD/out:/out pi_sbs_hf run_uei /in/inputs_1_UEI.csv /out
 ```
+
+## Questionnaire input
+
+A simple tool is proposed to collected the questionnaire data, for the `lpp` and `uei` protocol.
+The tool can be installed as a regular python package:
+
+```term
+# follow the guidelines provided above to set and activate a virtual environment
+pip install -e src/questionnaire
+run_questionnaire
+```
+
+A web page is mounted at direction: http://127.0.0.1:5000/.
+Follow the indication to enter the questionnaire values and generate the csv files needed to feed the `lpp` and `uei` scripts.
 
 ## Acknowledgements
 
