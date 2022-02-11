@@ -4,7 +4,7 @@
 
     <test pi_name="run_dualtask"
           parameters="/in/subject_1_platformData_exo.csv /in/subject_1_platformData_noexo.csv /in/subject_1_condition.yaml /out"
-          input_folder="dual_task/input"
+          input_folder="dualtask/input"
           output_folder="dualtask/output"/>
 
     <test pi_name="run_lpp"

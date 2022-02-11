@@ -1,6 +1,6 @@
 # HF_metrics
 
-_To be extended to cover the two other scripts_
+Todo: _To be extended to cover the two other scripts_
 
 [scriptDualTask.py](src/pi_hf/scriptDualTask.py) takes as an input the data files (in .csv format) related to the HF protocols for both with and without the use of exoskeleton.
 Datafile names should be provided with .csv extension.
@@ -69,9 +69,10 @@ run_uei test/uei/input/inputs_1_UEI_raw.csv False out
 ## Docker image
 
 The use of Docker image is only available for Linux machine
+
 ### Build from source
 
-_(only tested under Linux)_
+Caution: _(only tested under Linux)_
 
 Run the following command in order to create the docker image for this PI:
 

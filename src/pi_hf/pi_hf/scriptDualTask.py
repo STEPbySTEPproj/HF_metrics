@@ -104,7 +104,7 @@ def main(config):
 
     # execution time: total time ascending/descending
 
-    with open(config.condition, 'r') as file:
+    with open(config.condition, 'r', encoding='utf-8') as file:
         times = yaml.safe_load(file)
 
     print (times)
@@ -164,40 +164,36 @@ def entry_point():
     folder_out = sys.argv[4]
 
     if not os.path.exists(fn_exo_datafile):
-        print(colored("Input file {} does not exist".format(fn_exo_datafile), "red"))
+        print(colored(f'Input file {fn_exo_datafile} does not exist', "red"))
         sys.exit(-1)
 
     if not os.path.isfile(fn_exo_datafile):
-        print(colored("Input path {} is not a file".format(fn_exo_datafile), "red"))
+        print(colored(f'Input path {fn_exo_datafile} is not a file', "red"))
         sys.exit(-1)
 
     if not os.path.exists(fn_noexo_datafile):
-        print(colored("Input file {} does not exist".format(fn_noexo_datafile), "red"))
+        print(colored(f'Input file {fn_noexo_datafile} does not exist', "red"))
         sys.exit(-1)
 
     if not os.path.isfile(fn_noexo_datafile):
-        print(colored("Input path {} is not a file".format(fn_noexo_datafile), "red"))
+        print(colored(f'Input path {fn_noexo_datafile} is not a file', "red"))
         sys.exit(-1)
 
     if not os.path.exists(fn_condition):
-        print(colored("Input file {} does not exist".format(fn_condition), "red"))
+        print(colored(f'Input file {fn_condition} does not exist', "red"))
         sys.exit(-1)
 
     if not os.path.isfile(fn_condition):
-        print(colored("Input path {} is not a file".format(fn_condition), "red"))
+        print(colored(f'Input path {fn_condition} is not a file', "red"))
         sys.exit(-1)
 
 
     if not os.path.exists(folder_out):
-        print(colored(
-            "Output folder {} does not exist".format(folder_out),
-            "red"))
+        print(colored(f'Output folder {folder_out} does not exist', "red"))
         sys.exit(-1)
 
     if not os.path.isdir(folder_out):
-        print(colored(
-            "{} is not a folder".format(folder_out),
-            "red"))
+        print(colored(f'{folder_out} is not a folder', "red"))
         sys.exit(-1)
 
 
