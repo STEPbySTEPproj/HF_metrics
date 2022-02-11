@@ -99,6 +99,7 @@ def main(config):
     with open(config.condition, 'r') as file:
         times = yaml.safe_load(file)
     
+    print (times)
     exe_time_ad_no_exo = times['noexo_task_time']
     exe_time_ad_exo = times['exo_task_time']
     
@@ -117,7 +118,7 @@ def main(config):
                                                'difference': tot_time_diff},
                       'total_execution_time': {'no exo': tot_ad_time_diff, 'exo': exe_time_ad_no_exo,
                                                'difference': exe_time_ad_exo}}
-    
+
     if not os.path.exists(config.output_folder):
         os.makedirs(config.output_folder)
 
