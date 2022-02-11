@@ -1,0 +1,3 @@
+type: vector
+label: ['resp_time_noexo', 'resp_time_exo', 'resp_time_diff']
+value: [64.946, 64.946, 0.0]

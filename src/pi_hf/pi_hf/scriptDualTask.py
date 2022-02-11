@@ -34,6 +34,14 @@ def load_data(filename):
     return pd.read_csv(filename)
 
 
+def store_vector_pi(filename, pi):
+
+    with open(filename, 'w', encoding='utf-8') as file:
+        str_score = 'type: vector\n'
+        str_score += f'label: {list(pi.keys())}\n'
+        str_score += f'value: {list(pi.values())}\n'
+        file.write(str_score)
+
 def main(config):
 
     df_no_exo = load_data(config.noexo_datafile)
@@ -93,16 +101,16 @@ def main(config):
     #######################
     # DATA DIFFERENCES
     #######################
-    
+
     # execution time: total time ascending/descending
 
     with open(config.condition, 'r') as file:
         times = yaml.safe_load(file)
-    
+
     print (times)
     exe_time_ad_no_exo = times['noexo_task_time']
     exe_time_ad_exo = times['exo_task_time']
-    
+
     total_err_resp_diff = total_err_exo - total_err_no_exo
     tot_time_diff = total_time_exo - total_time_no_exo
     tot_ad_time_diff = float(exe_time_ad_exo) - float(exe_time_ad_no_exo)
@@ -112,19 +120,24 @@ def main(config):
     print(f"Difference in total time taken for the responses: {tot_time_diff}")
     print(f"Difference in total execution time: {tot_ad_time_diff}")
 
-    f_metrics_dict = {'total_errors': {'no exo': total_err_no_exo, 'exo': total_err_exo,
-                                       'difference': total_err_resp_diff},
-                      'total_responses_time': {'no exo': total_time_no_exo, 'exo': total_time_exo,
-                                               'difference': tot_time_diff},
-                      'total_execution_time': {'no exo': tot_ad_time_diff, 'exo': exe_time_ad_no_exo,
-                                               'difference': exe_time_ad_exo}}
+    f_metrics_dict = {'total_errors': {'error_noexo': total_err_no_exo, 'error_exo': total_err_exo,
+                                       'error_diff': total_err_resp_diff},
+                      'total_responses_time': {'resp_time_noexo': total_time_no_exo, 'resp_time_exo': total_time_exo,
+                                               'resp_time_diff': tot_time_diff},
+                      'total_execution_time': {'ex_time_noexo': tot_ad_time_diff, 'ex_time_exo': exe_time_ad_no_exo,
+                                               'ex_time_diff': exe_time_ad_exo}}
 
     if not os.path.exists(config.output_folder):
         os.makedirs(config.output_folder)
 
-    file_output = config.output_folder + "/pi_hf.yaml"
-    with open(file_output, 'w') as file:
-        yaml.dump(f_metrics_dict, file)
+    file_output = config.output_folder + '/pi_total_error.yaml'
+    store_vector_pi(file_output, f_metrics_dict['total_errors'])
+
+    file_output = config.output_folder + '/pi_execution_time.yaml'
+    store_vector_pi(file_output, f_metrics_dict['total_execution_time'])
+
+    file_output = config.output_folder + '/pi_response_time.yaml'
+    store_vector_pi(file_output, f_metrics_dict['total_responses_time'])
 
 
 if __name__ == '__main__':
