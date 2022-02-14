@@ -1,0 +1,3 @@
+type: vector
+label: ['error_noexo', 'error_exo', 'error_diff']
+value: [16.0, 16.0, 0.0]

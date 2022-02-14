@@ -1,0 +1,3 @@
+type: vector
+label: ['ex_time_noexo', 'ex_time_exo', 'ex_time_diff']
+value: [0.0, 1.0, 1.0]

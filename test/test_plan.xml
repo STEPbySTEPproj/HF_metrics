@@ -2,14 +2,19 @@
 
 <test_plan>
 
+    <test pi_name="run_dualtask"
+          parameters="/in/subject_1_platformData_exo.csv /in/subject_1_platformData_noexo.csv /in/subject_1_condition.yaml /out"
+          input_folder="dualtask/input"
+          output_folder="dualtask/output"/>
+
     <test pi_name="run_lpp"
           parameters="/in/inputs_1_LPP.csv /out"
-          input_folder="input"
+          input_folder="lpp/input"
           output_folder="lpp/output"/>
 
     <test pi_name="run_uei"
           parameters="/in/inputs_1_UEI.csv /out"
-          input_folder="input"
+          input_folder="uei/input"
           output_folder="uei/output"/>
 
 </test_plan>

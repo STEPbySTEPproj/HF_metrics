@@ -28,7 +28,7 @@ setup(
     install_requires=install_requires,
     #scripts=['script/run_pi_hf'],
     entry_points = {
-        "console_scripts": ['run_hf = pi_hf.DualTaskscript:entry_point',
+        "console_scripts": ['run_dualtask = pi_hf.scriptDualTask:entry_point',
                             'run_lpp = pi_hf.scriptLPP:entry_point',
                             'run_uei = pi_hf.scriptUEI:entry_point',],
     },

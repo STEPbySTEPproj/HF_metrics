@@ -12,7 +12,7 @@ from wtforms import (
 )
 # from wtforms.widgets import ListWidget, CheckboxInput
 # from wtforms.validators import Optional, DataRequired, InputRequired, Email, ValidationError
-from wtforms.validators import DataRequired, InputRequired, NumberRange
+from wtforms.validators import InputRequired, NumberRange
 # from urllib.parse import urlparse
 
 class formLPP(FlaskForm):
